@@ -4,8 +4,10 @@
   if($_SESSION['status_login'] != true){
     echo '<script>window.location="login.php"</script>';
   }
-
   $product = mysqli_query($conn, "SELECT * FROM tb_product WHERE product_id = '".$_GET['id']."'");
+  if(mysqli_num_rows($product) == 0){
+    echo '<script>window.location="data_product.php"</script>';
+  }
   $p = mysqli_fetch_object($product);
 ?>
 <!DOCTYPE html>
@@ -28,7 +30,7 @@
             <li><a href="dashboard.php">Dashboard</a></li>
             <li><a href="profil.php">Profil</a></li>
             <li><a href="category.php">Category</a></li>
-            <li><a href="product.php">Product</a></li>
+            <li><a href="data_product.php">Product</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
         </div>
@@ -67,6 +69,58 @@
                 <?php 
                 if(isset($_POST['submit'])){
 
+                    // data imputan dari form
+                    $category       = $_POST['category'];
+                    $nama           = $_POST['nama'];
+                    $harga          = $_POST['harga'];
+                    $description    = $_POST['description'];
+                    $status         = $_POST['status'];
+                    $foto           = $_POST['foto'];
+
+                    // data gambar yang baru 
+                    $filename = $_FILES['gambar']['name'];
+                    $tmp_name = $_FILES['gambar']['tmp_name'];
+
+                    
+                    // jika admin ganti gambar 
+                    if($filename != ''){
+                        $type1 = explode('.', $filename);
+                        $type2 = $type1[1];
+
+                        $newname = 'produk'.time().'.'.$type2;
+
+                        //menampung data format file yang diizinkan
+                        $tipe_diizinkan = array('jpg', 'jpeg', 'png', 'jfif', 'gif');
+
+                        // validasi format file
+                    if(!in_array($type2, $tipe_diizinkan)){
+                    // jika format file tidak ada di dalam tipe diizinkan
+                    echo '<script>alert("Format file tidak diizinkan")</script>';
+                    }else {
+                        unlink('./produk/'.$foto);
+                        move_uploaded_file($tmp_name, './produk/'.$newname);
+                        $namagambar = $newname;
+                    }
+                }else{
+                    // jika admin tidak ganti gambar
+                    $namagambar = $foto;
+                }
+
+                // query update data produk
+                  $update = mysqli_query($conn, "UPDATE tb_product SET
+                                         category_id = '".$category."',
+                                         product_name = '".$nama."',
+                                         product_price = '".$harga."',
+                                         product_description = '".$description."',
+                                         product_image = '".$namagambar."',
+                                         product_status = '".$status."'
+                                         WHERE product_id = '".$p->product_id ."' ");
+                if($update){
+                    echo '<script>alert("Ubah data berhasil")</script>';
+                    echo '<script>window.location="data_product.php"</script>';
+                }else{
+                    echo 'gagal'.mysqli_error($conn);
+                }
                     
 
                 }
