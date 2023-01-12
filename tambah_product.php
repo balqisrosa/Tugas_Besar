@@ -25,7 +25,7 @@
             <li><a href="dashboard.php">Dashboard</a></li>
             <li><a href="profil.php">Profil</a></li>
             <li><a href="category.php">Category</a></li>
-            <li><a href="product.php">Product</a></li>
+            <li><a href="data_product.php">Product</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
         </div>
@@ -103,7 +103,7 @@
 
                         if($insert){
                             echo '<script>alert("Tambah data berhasil")</script>';
-                            echo '<script>window.location="product.php"</script>';
+                            echo '<script>window.location="data_product.php"</script>';
                         }else{
                             echo 'gagal'.mysqli_error($conn);
                         }
