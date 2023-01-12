@@ -20,10 +20,10 @@
         <div class="container">
         <h1><a href="dashboard.php">BaRa Store</a></h1>
         <ul>
-            <li><a href="dashboard.php">Dashboard</a></li>
+            <li><a href="index.php">Dashboard</a></li>
             <li><a href="profil.php">Profil</a></li>
             <li><a href="category.php">Category</a></li>
-            <li><a href="product.php">Product</a></li>
+            <li><a href="data_product.php">Product</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
         </div>
