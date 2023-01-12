@@ -12,6 +12,6 @@ if(isset($_GET['idp'])){
 
     unlink('./produk/' .$p->product_image);
     $delete = mysqli_query($conn, "DELETE FROM tb_product WHERE product_id = '".$_GET['idp']."' ");
-    echo '<script>window.location="product.php"</script>';
+    echo '<script>window.location="data_product.php"</script>';
 }
 ?>
