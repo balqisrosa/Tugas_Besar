@@ -30,7 +30,7 @@
             <li><a href="dashboard.php">Dashboard</a></li>
             <li><a href="profil.php">Profil</a></li>
             <li><a href="category.php">Category</a></li>
-            <li><a href="product.php">Product</a></li>
+            <li><a href="data_product.php">Product</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
         </div>
