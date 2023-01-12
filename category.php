@@ -24,7 +24,7 @@
             <li><a href="dashboard.php">Dashboard</a></li>
             <li><a href="profil.php">Profil</a></li>
             <li><a href="category.php">Category</a></li>
-            <li><a href="product.php">Product</a></li>
+            <li><a href="data_product.php">Product</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
         </div>
@@ -48,6 +48,7 @@
                         <?php
                         $no = 1;
                         $category = mysqli_query($conn, "SELECT * FROM tb_category ORDER BY category_id DESC");
+                        if(mysqli_num_rows($category) > 0){
                         while($row = mysqli_fetch_array($category)){
                         ?>
                         <tr>
@@ -57,6 +58,10 @@
                                 <a href="edit_category.php?id=<?php echo $row ['category_id']?>">Edit</a> || <a href="proses_delete.php?idc=<?php echo $row['category_id']?>" onclick="return confirm('Yakin ingin hapus ?')">Delete</a>
                             </td>
                         </tr>
+                        <?php }}else{ ?>
+                            <tr>
+                                <td colspan="3">Tidak ada data</td>
+                            </tr>
                         <?php } ?>
                     </tbody>
                 </table>
